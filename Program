@@ -1,1 +1,160 @@
+class Program
+{
+    // Zakladni Utok
+    static void ZakladniUtok(Cichnamon utocnik, Cichnamon obet, Random nahoda)
+    {
+        int maxDmg = obet.Hp / 3;
+        if (maxDmg < 1)
+        {
+            maxDmg = 1;
+        }
 
+        int finalDmg = nahoda.Next(1, maxDmg + 1);
+        obet.Hp -= finalDmg;
+
+        Console.WriteLine(utocnik.Jmeno + " pouzil " + utocnik.ZakladniUtok.Nazev + " a dal " + finalDmg + " dmg.");
+    }
+
+    // Specialni utok
+    static void SpecialniUtok(Cichnamon utocnik, Cichnamon obet, Random nahoda)
+    {
+        int minDmg = obet.Hp / 3;
+        int maxDmg = obet.Hp / 2;
+        if (maxDmg <= minDmg)
+        {
+            maxDmg = minDmg + 1;
+        }
+
+        int finalDmg = nahoda.Next(minDmg, maxDmg + 1);
+        obet.Hp -= finalDmg;
+
+        Console.WriteLine(utocnik.Jmeno + " vyvolal " + utocnik.SpecialniUtok.Nazev + " a dal " + finalDmg + " dmg.");
+    }
+
+    // Heal 30% HP
+    static void Heal(Cichnamon cichnamon, Random nahoda)
+    {
+        int hodnotaHealu = (cichnamon.Hp * 30) / 100;
+
+        cichnamon.Hp += hodnotaHealu;
+        if (cichnamon.Hp > cichnamon.MaxHp)
+        {
+            cichnamon.Hp = cichnamon.MaxHp;
+        }
+        Console.WriteLine(cichnamon.Jmeno + " se vylecil o " + hodnotaHealu + " HP.");
+    }
+
+    // Vypis jmeno Cichnamona + HP
+    static void VypisStav(Cichnamon cichnamon)
+    {
+        if (cichnamon.Hp < 0){
+            cichnamon.Hp = 0;
+        }
+        Console.WriteLine(cichnamon.Jmeno + ": " + cichnamon.Hp + " HP");
+    }
+
+    static void Main()
+    {
+        Random nahoda = new Random();
+
+        // Tvorba utoku
+        Utok ember = new Utok("Ember");
+        Utok blastBurn = new Utok("Blast Burn");
+        Utok waterGun = new Utok("Water Gun");
+        Utok hydroPump = new Utok("Hydro Pump");
+        Utok thunderShock = new Utok("Thunder Shock");
+        Utok thunderbolt = new Utok("Thunderbolt");
+
+        // Moznosti Cichnamonu pro hrace
+        Cichnamon[] nabidka = new Cichnamon[2];
+        nabidka[0] = new Cichnamon("Charizard", 40, ember, blastBurn);
+        nabidka[1] = new Cichnamon("Blastoise", 45, waterGun, hydroPump);
+
+        // cichnamon pro pocitac
+        Cichnamon PocitacCichnamon = new Cichnamon("Pikachu", 35, thunderShock, thunderbolt);
+
+        // Vyber cichnamona pro hrace
+        Console.WriteLine("VYBER SI SVEGO CICHNAMONA:");
+        Console.WriteLine("1 - " + nabidka[0].Jmeno);
+        Console.WriteLine("2 - " + nabidka[1].Jmeno);
+        Console.Write("Zadej cislo: ");
+        string volbaHrace = Console.ReadLine();
+
+        Cichnamon hracuvCichnamon;
+
+        if (volbaHrace == "1")
+        {
+            hracuvCichnamon = nabidka[0]; // Vybral si Charizarda
+        }
+        else
+        {
+            hracuvCichnamon = nabidka[1]; // Vybral si Blastoise
+        }
+
+
+        Trener hrac = new Trener("Hrac", hracuvCichnamon);
+        Trener oponent = new Trener("Pocitac", PocitacCichnamon);
+
+        Console.WriteLine("\nzacatek souboje");
+
+        Cichnamon hracuvAktualni = hrac.Aktualni;
+        Cichnamon oponentuvAktualni = oponent.Aktualni;
+
+        VypisStav(hracuvAktualni);
+        VypisStav(oponentuvAktualni);
+        Console.WriteLine("----------------------------------------");
+
+        // hlavni while pro vyber moznosti utoku a heal
+        while (hracuvAktualni.Hp > 0 && oponentuvAktualni.Hp > 0)
+        {
+            Console.WriteLine("1 - Zakladni utok");
+            Console.WriteLine("2 - Specialni utok");
+            Console.WriteLine("3 - Heal");
+            Console.Write("Vyber moznost: ");
+            string akce = Console.ReadLine();
+            Console.WriteLine(); // prazdnej radek 
+
+            if (akce == "1")
+            {
+                ZakladniUtok(hracuvAktualni, oponentuvAktualni, nahoda);
+            }
+            else if (akce == "2")
+            {
+                SpecialniUtok(hracuvAktualni, oponentuvAktualni, nahoda);
+            }
+            else
+            {
+                Heal(hracuvAktualni, nahoda);
+            }
+
+            VypisStav(oponentuvAktualni);
+
+            if (oponentuvAktualni.Hp > 0)
+            {
+                Console.WriteLine("\nhraje souper");
+
+                int volbaPocitace = nahoda.Next(1, 3);
+
+                if (volbaPocitace == 1){
+                    ZakladniUtok(oponentuvAktualni, hracuvAktualni, nahoda);
+                }
+                else {
+                    SpecialniUtok(oponentuvAktualni, hracuvAktualni, nahoda);
+                }
+
+                VypisStav(hracuvAktualni);
+            }
+
+            Console.WriteLine("\n----------------------------------------");
+        }
+
+        Console.WriteLine("\n    KONEC HRY ");
+
+        // lvl trenera + 1
+        if (oponentuvAktualni.Hp <= 0)
+        {
+            hrac.Lvl += 1;
+            Console.WriteLine(hrac.Jmeno + " ziskal lvl! Aktualni lvl: " + hrac.Lvl);
+        }
+    }
+}
