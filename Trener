@@ -1,5 +1,6 @@
 class Trener
 {
+
     public string Jmeno { get; set; }
     public Cichnamon Aktualni { get; set; }
     public int Lvl { get; set; }
