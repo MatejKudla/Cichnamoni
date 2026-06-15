@@ -1,1 +1,17 @@
+class Cichnamon
+{
+    public string Jmeno { get; set; }
+    public int Hp { get; set; }
+    public int MaxHp { get; set; }
+    public Utok ZakladniUtok { get; set; }
+    public Utok SpecialniUtok { get; set; }
 
+    public Cichnamon(string jmeno, int maxHp, Utok zakladniUtok, Utok specialniUtok)
+    {
+        Jmeno = jmeno;
+        MaxHp = maxHp;
+        Hp = maxHp; // Na zacatku je full HP
+        ZakladniUtok = zakladniUtok;
+        SpecialniUtok = specialniUtok;
+    }
+}
