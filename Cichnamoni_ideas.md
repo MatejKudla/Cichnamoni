@@ -51,3 +51,5 @@ Hra pokračuje **dokud** je HP hráče > 0 **a** hráč chce pokračovat.
 Hra končí, když:
 - HP hráče = 0, nebo
 - Hráč se rozhodne skončit
+
+Cichnamoni_ideas.md z textu je dano do Markdownu pomoci AI
