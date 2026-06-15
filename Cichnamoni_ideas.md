@@ -52,4 +52,5 @@ Hra končí, když:
 - HP hráče = 0, nebo
 - Hráč se rozhodne skončit
 
-Cichnamoni_ideas.md z textu je dano do Markdownu pomoci AI
+
+PS: Cichnamoni_ideas.md z textu je dano do Markdownu pomoci AI
