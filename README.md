@@ -1,5 +1,8 @@
 # Cichnamoni
 projekt Cichnamoni
 
-<img width="335" height="597" alt="crazy_pickachu" src="https://github.com/user-attachments/assets/50311bb8-d4a8-43cf-9ccf-3673f03d6ca3" />
+<div align="center">
+  <img width="335" height="404" alt="crazy_pickachu" src="https://github.com/user-attachments/assets/12861bfe-9595-43c2-bd55-96cf1c3db051" />
+</div>
+
 
