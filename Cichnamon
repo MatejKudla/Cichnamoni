@@ -13,5 +13,6 @@ class Cichnamon
         Hp = maxHp; // Na zacatku je full HP
         ZakladniUtok = zakladniUtok;
         SpecialniUtok = specialniUtok;
+
     }
 }
