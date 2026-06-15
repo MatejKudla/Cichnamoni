@@ -23,6 +23,7 @@ class Program
         if (maxDmg <= minDmg)
         {
             maxDmg = minDmg + 1;
+
         }
 
         int finalDmg = nahoda.Next(minDmg, maxDmg + 1);
@@ -42,6 +43,7 @@ class Program
             cichnamon.Hp = cichnamon.MaxHp;
         }
         Console.WriteLine(cichnamon.Jmeno + " se vylecil o " + hodnotaHealu + " HP.");
+
     }
 
     // Vypis jmeno Cichnamona + HP
