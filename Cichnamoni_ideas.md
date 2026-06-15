@@ -53,4 +53,4 @@ Hra končí, když:
 - Hráč se rozhodne skončit
 
 
-PS: Cichnamoni_ideas.md z textu je dano do Markdownu pomoci AI
+PS: Cichnamoni_ideas je z textu dano pomoci AI do Markdownu (nechtelo se me to delat :D)
