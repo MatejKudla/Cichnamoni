@@ -1,50 +1,5 @@
 class Program
 {
-    // Zakladni Utok
-    static void ZakladniUtok(Cichnamon utocnik, Cichnamon obet, Random nahoda)
-    {
-        int maxDmg = obet.Hp / 3;
-        if (maxDmg < 1)
-        {
-            maxDmg = 1;
-        }
-
-        int finalDmg = nahoda.Next(1, maxDmg + 1);
-        obet.Hp -= finalDmg;
-
-        Console.WriteLine(utocnik.Jmeno + " pouzil " + utocnik.ZakladniUtok.Nazev + " a dal " + finalDmg + " dmg.");
-    }
-
-    // Specialni utok
-    static void SpecialniUtok(Cichnamon utocnik, Cichnamon obet, Random nahoda)
-    {
-        int minDmg = obet.Hp / 3;
-        int maxDmg = obet.Hp / 2;
-        if (maxDmg <= minDmg)
-        {
-            maxDmg = minDmg + 1;
-
-        }
-
-        int finalDmg = nahoda.Next(minDmg, maxDmg + 1);
-        obet.Hp -= finalDmg;
-
-        Console.WriteLine(utocnik.Jmeno + " vyvolal " + utocnik.SpecialniUtok.Nazev + " a dal " + finalDmg + " dmg.");
-    }
-
-    // Heal 30% HP
-    static void Heal(Cichnamon cichnamon, Random nahoda)
-    {
-        int hodnotaHealu = (cichnamon.Hp * 30) / 100;
-
-        cichnamon.Hp += hodnotaHealu;
-        if (cichnamon.Hp > cichnamon.MaxHp)
-        {
-            cichnamon.Hp = cichnamon.MaxHp;
-        }
-        Console.WriteLine(cichnamon.Jmeno + " se vylecil o " + hodnotaHealu + " HP.");
-
-    }
 
     // Vypis jmeno Cichnamona + HP
     static void VypisStav(Cichnamon cichnamon)
@@ -116,18 +71,19 @@ class Program
 
             Console.WriteLine(); // prazdnej radek 
 
+            // vyber hrace
             if (akce == "1")
-            {
-                ZakladniUtok(hracuvAktualni, oponentuvAktualni, nahoda);
-            }
-            else if (akce == "2")
-            {
-                SpecialniUtok(hracuvAktualni, oponentuvAktualni, nahoda);
-            }
-            else
-            {
-                Heal(hracuvAktualni, nahoda);
-            }
+                {
+                    hracuvAktualni.UtocZakladnim(oponentuvAktualni, nahoda);
+                    }
+                else if (akce == "2")
+                    {
+                        hracuvAktualni.UtocSpecialnim(oponentuvAktualni, nahoda);
+                        }
+                    else
+                    {
+                        hracuvAktualni.VyleciSe();
+                        }
 
             VypisStav(oponentuvAktualni);
 
@@ -136,18 +92,19 @@ class Program
                 Console.WriteLine("\n   hraje souper");
 
                 int volbaPocitace = nahoda.Next(1, 4);
-
-                if (volbaPocitace == 1){
-                    ZakladniUtok(oponentuvAktualni, hracuvAktualni, nahoda);
-                }
-
-                else if (volbaPocitace == 2){
-                    SpecialniUtok(oponentuvAktualni, hracuvAktualni, nahoda);
-                }
-
-                else{ 
-                    Heal(oponentuvAktualni, nahoda);
-                }
+            // volba pocitace
+                if (volbaPocitace == 1)
+                    {
+                        oponentuvAktualni.UtocZakladnim(hracuvAktualni, nahoda);
+                        }
+                    else if (volbaPocitace == 2)
+                        {
+                            oponentuvAktualni.UtocSpecialnim(hracuvAktualni, nahoda);
+                            }
+                        else
+                            { 
+                                oponentuvAktualni.VyleciSe();
+                                }
 
                 VypisStav(hracuvAktualni);
             }
