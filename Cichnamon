@@ -31,8 +31,10 @@ class Cichnamon
     {
         int minDmg = obet.Hp / 3;
         int maxDmg = obet.Hp / 2;
-        if (maxDmg <= minDmg) maxDmg = minDmg + 1;
-
+        if (maxDmg <= minDmg)
+            {
+                maxDmg = minDmg + 1;
+                }
         int finalDmg = nahoda.Next(minDmg, maxDmg + 1);
         obet.Hp -= finalDmg;
 
@@ -44,7 +46,10 @@ class Cichnamon
         int hodnotaHealu = (this.Hp * 30) / 100;
 
         this.Hp += hodnotaHealu;
-        if (this.Hp > this.MaxHp) this.Hp = this.MaxHp;
+        if (this.Hp > this.MaxHp)
+            {
+                this.Hp = this.MaxHp;
+                    }
 
         Console.WriteLine(this.Jmeno + " se vylecil o " + hodnotaHealu + " HP.");
     }
